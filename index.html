@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<link href="https://gmpg.org/xfn/11" rel="profile">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+
+
+<title>HB!Pros Around the World v.0.1</title>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2.rc.2/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css?v=1qy1qy1qy1qy1qy1qy1qylaks">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2.rc.2/leaflet.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/3.13.2/riot+compiler.min.js"></script>
+	<script src="js/hbpros.js?v=1qy1qy1qy1qy1qy1qy1qy123werweaweiweueiewwaaraso"></script>
+
+<script type="riot/tag">
+  <moo>
+  	<div>
+    	<h1>Moo</h1>
+    </div>
+  </moo>
+</script>
+
+<script type="riot/tag">
+  <gmap class="gmap">
+  	<div>        
+            <div id="map"></div>            
+    </div>
+    
+    let tag = this   
+  </gmap>
+</script>
+
+<script type="riot/tag">
+    <osmap>
+        <style>
+            .osmap,
+            #osmap {
+                height: 100vh;
+            }
+        </style>
+        <div class="osmap">
+            <div id="osmap"></div>
+        </div>
+
+        let tag = this
+    </osmap>
+</script>
+
+<script type="riot/tag">
+  <web-app class="web-app">
+  	<div>
+        <osmap />
+    </div>
+    
+    let tag = this
+    
+    this.hbpro = HBPRO_DATA[0]
+
+    tag.on("mount", () => {
+        initMap()
+    })
+    
+  </web-app>
+</script>
+</head>
+
+<body>
+
+
+	<web-app />
+
+	<script>
+		window.addEventListener('DOMContentLoaded', (event) => {
+  			riot.mount("*")
+		});
+
+	</script>
+</body>
