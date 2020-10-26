@@ -60,9 +60,11 @@ function moveMarker(hbpro) {
     marker.setLatLng([hbpro.lat, hbpro.lng]).update()
 }
 
-function initMap() {
+function initMap(hbproData) {
+    if(!hbproData) hbproData = HBPRO_DATA
+
     // get random pro from data
-    let hbpro = HBPRO_DATA[getRandomInt(HBPRO_DATA.length)]
+    let hbpro = hbproData[getRandomInt(hbproData.length)]
 
     // center of the map
     var center = [hbpro.lat, hbpro.lng];
@@ -80,7 +82,7 @@ function initMap() {
         .openPopup();
 
     setInterval(() => {
-        hbpro = HBPRO_DATA[getRandomInt(HBPRO_DATA.length)]
+        hbpro = hbproData[getRandomInt(hbproData.length)]
         moveMarker(hbpro)
     }, 6000)
 

@@ -14,12 +14,12 @@
 <title>HB!Pros Around the World v.0.1</title>
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2.rc.2/leaflet.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css?v=1qy1qy1qy1qy1qy1qy1qylaks">
+    <link rel="stylesheet" type="text/css" href="css/style.css?v=20201026">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2.rc.2/leaflet.js"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/3.13.2/riot+compiler.min.js"></script>
-	<script src="js/hbpros.js?v=1qy1qy1qy1qy1qy1qy1qy123werweaweiweueiewwaaraso"></script>
+	<script src="js/hbpros.js?v=20201026"></script>
 
 <script type="riot/tag">
   <moo>
@@ -65,8 +65,39 @@
     
     this.hbpro = HBPRO_DATA[0]
 
+    let hbproData = []
+
     tag.on("mount", () => {
-        initMap()
+        // get data from data sheet
+
+        var httpRequest = new XMLHttpRequest()
+        httpRequest.onreadystatechange = (resp) => {
+            if (httpRequest.readyState === 4) {
+                let data = JSON.parse(httpRequest.responseText)
+
+                if( data && data.values) {
+                    hbproData = data.values.map( (hbproObj) => {
+                        return {
+                            name: hbproObj[0],
+                            profileImgUrl: hbproObj[1],
+                            location: hbproObj[2],
+                            contact: [{
+                                label: hbproObj[3].split("|")[0],
+                                url: hbproObj[3].split("|")[1]
+                            }],
+                            lng: hbproObj[4].split(",")[0],
+                            lat: hbproObj[4].split(",")[1]
+                        }
+                    })
+
+                    initMap(hbproData)
+                }
+            }
+
+        }
+
+        httpRequest.open('GET', GSHEET) 
+        httpRequest.send()
     })
     
   </web-app>
@@ -74,14 +105,13 @@
 </head>
 
 <body>
-
-
 	<web-app />
 
 	<script>
+        var GSHEET=""
+
 		window.addEventListener('DOMContentLoaded', (event) => {
   			riot.mount("*")
 		});
-
 	</script>
 </body>
