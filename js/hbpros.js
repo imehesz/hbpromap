@@ -54,11 +54,20 @@ function getHbProInfo(hbpro) {
     `
 }
 
+function moveMarker(hbpro) {
+    map.flyTo([hbpro.lat, hbpro.lng])
+    marker._popup.setContent(getHbProInfo(hbpro))
+    marker.setLatLng([hbpro.lat, hbpro.lng]).update()
+}
+
 function initMap() {
+    // get random pro from data
+    let hbpro = HBPRO_DATA[getRandomInt(HBPRO_DATA.length)]
+
     // center of the map
-    var center = [HBPRO_DATA[0].lat, HBPRO_DATA[0].lng];
+    var center = [hbpro.lat, hbpro.lng];
     // Create the map
-    var map = L.map('osmap').setView(center, 3);
+    map = L.map('osmap').setView(center, 5);
 
     // Set up the OSM layer
     L.tileLayer(
@@ -67,13 +76,13 @@ function initMap() {
     }).addTo(map)
 
     marker = L.marker(center).addTo(map)
-        .bindPopup(getHbProInfo(HBPRO_DATA[0]))
+        .bindPopup(getHbProInfo(hbpro))
         .openPopup();
 
-
-    setTimeout(() => {
-        marker.setLatLng([HBPRO_DATA[1].lat, HBPRO_DATA[1].lng]).update();
-    }, 3000)
+    setInterval(() => {
+        hbpro = HBPRO_DATA[getRandomInt(HBPRO_DATA.length)]
+        moveMarker(hbpro)
+    }, 6000)
 
     // add a marker in the given location
     //L.marker(center).addTo(map);
