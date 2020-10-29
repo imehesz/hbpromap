@@ -14,12 +14,12 @@
 <title>HB!Pros Around the World v.0.1</title>
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2.rc.2/leaflet.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css?v=20201026">
+    <link rel="stylesheet" type="text/css" href="css/style.css?v=20201029">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2.rc.2/leaflet.js"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/3.13.2/riot+compiler.min.js"></script>
-	<script src="js/hbpros.js?v=20201026"></script>
+	<script src="js/hbpros.js?v=20201029"></script>
 
 <script type="riot/tag">
   <moo>
@@ -77,16 +77,26 @@
 
                 if( data && data.values) {
                     hbproData = data.values.map( (hbproObj) => {
+                        let socialArr = hbproObj[4] ? hbproObj[4].split("\n") : []
+
+                        console.log(hbproObj)
+
                         return {
                             name: hbproObj[0],
                             profileImgUrl: hbproObj[1],
                             location: hbproObj[2],
-                            contact: [{
+                            website: {
                                 label: hbproObj[3].split("|")[0],
                                 url: hbproObj[3].split("|")[1]
-                            }],
-                            lng: hbproObj[4].split(",")[0],
-                            lat: hbproObj[4].split(",")[1]
+                            },
+                            social: socialArr.map( (el) => {
+                                        return {
+                                            label: el.split("|")[0],
+                                            url: el.split("|")[1]
+                                        }
+                                    } ),
+                            lng: hbproObj[5].split(",")[0],
+                            lat: hbproObj[5].split(",")[1]
                         }
                     })
 
@@ -108,7 +118,7 @@
 	<web-app />
 
 	<script>
-        var GSHEET=""
+        var GSHEET="https://sheets.googleapis.com/v4/spreadsheets/1fLI3qZ_GGD6apHCZ-2ooaR-2cOZOR6pyA4Dupx6M88Y/values/Sheet1!A1:F5000?key=AIzaSyBLySbKUYIzPNpscruuGrSpnA3VeZ1sdvk"
 
 		window.addEventListener('DOMContentLoaded', (event) => {
   			riot.mount("*")
