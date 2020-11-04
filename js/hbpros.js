@@ -75,6 +75,11 @@ function _generateSocialLinks(hbpro) {
                             retval += `<a class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/68ff38b86f01b428567dcc406116e23728245f4e/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f696e7374616772616d2e737667" /></a>`
                             break;
 
+            case "youtube":
+                            retval += `<a class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/0f31a4f7adb78461ca03dfaad4a138eedf0d14e0/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f796f75747562652e737667" /></a>`
+
+                            break;
+
             default:
                 retval += `<a class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/16fa1202696e1ea968f37f2e6a31bd3e118df23d/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f67686f73742e737667"/></a>`
         }
