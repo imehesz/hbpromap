@@ -56,16 +56,70 @@
 </script>
 
 <script type="riot/tag">
+    <hbpros-list>
+        <style>
+            .hbpros-list {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                z-index: 100000;
+                background-color: #fff;
+                padding: 15px;
+                box-shadow: 2px 2px #aaa;
+                width: 50%;
+                font-size: 16px;
+            }
+
+            .hbpros-list header{
+                font-weight: bolder;
+            }
+
+
+            .hbpros-list.closed {
+                width: 15%;
+            }
+
+            .hbpros-list .button {
+                position: absolute;
+                right: 20px;
+                top: 15px;
+                cursor: pointer;
+            }
+        </style>
+
+        <div class="hbpros-list { isOpen ? 'open' : 'closed'}">
+            <header>{ opts.hbpros.length } HB!PROs around the world! <i class="button" onClick="{ toggleList }">{ isOpen ? "▼" : "►" }</i></header>
+
+            <div show={ isOpen }>
+                <hr>
+                <ul>
+                    <li each={ hbpro in opts.hbpros }>{ hbpro.name }</li>
+                <ul>
+            </div>
+        </div>
+
+        let tag = this
+
+        tag.isOpen = !!tag.opts.open
+
+        tag.toggleList = () => {
+            tag.isOpen = !tag.isOpen
+        }
+    </hbpros-list>
+</script>
+
+<script type="riot/tag">
   <web-app class="web-app">
   	<div>
+        <hbpros-list hbpros={ hbproData } open="" />
         <osmap />
     </div>
     
     let tag = this
     
-    this.hbpro = HBPRO_DATA[0]
+    tag.hbpro = HBPRO_DATA[0]
 
-    let hbproData = []
+    tag.hbproData = []
 
     tag.on("mount", () => {
         // get data from data sheet
@@ -76,10 +130,8 @@
                 let data = JSON.parse(httpRequest.responseText)
 
                 if( data && data.values) {
-                    hbproData = data.values.map( (hbproObj) => {
+                    tag.hbproData = data.values.map( (hbproObj) => {
                         let socialArr = hbproObj[4] ? hbproObj[4].split("\n") : []
-
-                        console.log(hbproObj)
 
                         return {
                             name: hbproObj[0],
@@ -100,7 +152,8 @@
                         }
                     })
 
-                    initMap(hbproData)
+                    initMap(tag.hbproData)
+                    tag.update()
                 }
             }
 
