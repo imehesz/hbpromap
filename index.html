@@ -81,13 +81,14 @@
                 top: 20px;
                 right: 20px;
                 z-index: 100000;
-                background-color: #fff;
+                background-color: rgba(0,0,0,0.75);
                 padding: 15px;
                 box-shadow: 2px 2px #aaa;
                 width: 85%;
                 font-size: 16px;
                 max-height: 95vh;
-                overflow: auto;
+                overflow: visible;
+                color: #fff;
             }
 
             .hbpros-list .closeme {
@@ -102,7 +103,8 @@
                 color: red;
             }
 
-            .hbpros-list header{
+            .hbpros-list header,
+            .hbpros-list .logo {
                 font-weight: bolder;
                 cursor: pointer;
                 text-align: center;
@@ -125,6 +127,7 @@
             }
 
             .hbpros-list .flex-container .card {
+                color: #333;
                 border: solid 1px #555;
                 background-color: #fff;
                 box-shadow:  0 0 5px  rgba(0,0,0,0.6);
@@ -133,6 +136,28 @@
                 -o-box-shadow: 0 0 5px  rgba(0,0,0,0.6);
                 border-radius: 5px;
                 padding: 10px;
+            }
+
+            .hbpros-list .logo {
+                position: absolute;
+                left: -70px;
+                width: 75px;
+                height: 75px;
+                top: -13px;
+            }
+
+            .hbpros-list.open .logo {
+                display: none;
+            }
+
+            .hbpros-list .logo img {
+                width: 100%;
+                height: 100%;
+            }
+
+            .hbpros-list .list-container {
+                height: 90vh;
+                overflow: auto;
             }
 
             @media only screen and (min-width: 960px) {
@@ -145,7 +170,11 @@
         <div class="hbpros-list { isOpen ? 'open' : 'closed'}">
             <header onClick="{ toggleList }">{ opts.hbpros.length } HB!PROs Around The World! <span class="closeme">X</span></header>
 
-            <div show={ isOpen }>
+            <div onClick="{ toggleList }" class="logo">
+                <img src="https://pbs.twimg.com/profile_images/1275534043300462601/nb7xfdlf_400x400.jpg" />
+            </div>
+
+            <div class="list-container" show={ isOpen }>
                 <hr>
                 <ul class="flex-container">
                     <li class="card" each={ hbpro in hbpros }>
