@@ -154,3 +154,26 @@ body {
     width: 18px;
     height: 18px;
 }
+
+.hbpro .is-host {
+    font-size: 9px;
+    text-transform: uppercase;
+    margin: 7px 0;
+}
+        
+.hbpro .is-host .bullet {
+    background-color: gray;
+    color: #fff;
+    padding: 2px 5px;
+    font-weight: bolder;
+    border-radius: 5px;
+    margin-left: 3px;
+}
+
+.hbpro .is-host .bullet.bullet__live {
+    background-color: red;
+}
+
+.hbpro .is-host .bullet.bullet__online {
+    background-color: blue;
+}

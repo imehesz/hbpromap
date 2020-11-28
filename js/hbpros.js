@@ -88,8 +88,17 @@ function _generateSocialLinks(hbpro) {
     return retval
 }
 
+function _generateHostInfo(hbpro) {
+    return  '<div class="is-host">' +
+                (( hbpro.hostLive == "Y" || hbpro.hostOnline == "Y" ) ? '<span>Hosting:</span>' : '') +
+                (( hbpro.hostLive == "Y" ) ? '<span class="bullet bullet__live">LIVE</span>' : '') +
+                (( hbpro.hostOnline == "Y" ) ? '<span class="bullet bullet__online">ONLINE</span>' : '') +
+            '</div>'
+}
+
 function getHbProInfo(hbpro) {
     let socialLinks = _generateSocialLinks(hbpro)
+    let hostInfo = _generateHostInfo(hbpro)
 
 	return `
 			<div class="hbpro">
@@ -97,7 +106,10 @@ function getHbProInfo(hbpro) {
                     <img src="${ hbpro.profileImgUrl }"/>
                 </div>
                 <div class="hbpro-info">
-                    <strong>${ hbpro.name }</strong><br />
+                    <strong>${ hbpro.name }</strong>
+
+                    ${ hostInfo }
+
                     ${ hbpro.location }<br />
                     <a href="${ hbpro.website.url }">${ hbpro.website.label }</a><br />
                     ${ socialLinks }

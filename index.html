@@ -25,12 +25,12 @@
 <title>HB!Pros Around the World v.0.1</title>
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2.rc.2/leaflet.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css?v=20201007">
+    <link rel="stylesheet" type="text/css" href="css/style.css?v=20201128">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2.rc.2/leaflet.js"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/3.13.2/riot+compiler.min.js"></script>
-	<script src="js/hbpros.js?v=20201107"></script>
+	<script src="js/hbpros.js?v=20201128"></script>
 
 <script type="riot/tag">
   <moo>
@@ -170,6 +170,7 @@
                 font-size: 32px;
             }
 
+
             @media only screen and (min-width: 960px) {
                 .hbpros-list {
                     width: 95%;
@@ -207,8 +208,13 @@
 			                        <img src="{ hbpro.profileImgUrl }"/>
 			                    </div>
 			                    <div class="hbpro-info">
-			                        <strong>{ hbpro.name }</strong><br />
-			                        { hbpro.location }<br />
+			                        <strong>{ hbpro.name }</strong>
+                                    <div class="is-host">
+                                        <span show={ hbpro.hostLive == "Y" || hbpro.hostOnline == "Y" }>Hosting:</span> 
+                                        <span show={ hbpro.hostLive == "Y" } class="bullet bullet__live">LIVE</span> 
+                                        <span show={ hbpro.hostOnline == "Y" } class="bullet bullet__online">ONLINE</span>
+                                    </div>
+                                    { hbpro.location }<br />
 			                        <a href="{ hbpro.website.url }">{ hbpro.website.label }</a><br />
 			                        <raw html="{ _generateSocialLinks(hbpro) }"></raw>
 			                    </div>
@@ -292,7 +298,9 @@
                                         }
                                     } ),
                             lng: hbproObj[5].split(",")[0],
-                            lat: hbproObj[5].split(",")[1]
+                            lat: hbproObj[5].split(",")[1],
+                            hostLive: hbproObj[7],
+                            hostOnline: hbproObj[8]
                         }
                     })
 
