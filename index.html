@@ -115,18 +115,7 @@
                 width: unset;
             }
 
-            .hbpros-list .flex-container {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-            }
-
-            .hbpros-list .flex-container {
-                font-weight: bolder;
-                gap: 15px;
-            }
-
-            .hbpros-list .flex-container .card {
+            .hbpros-list .card {
                 color: #333;
                 border: solid 1px #555;
                 background-color: #fff;
@@ -156,13 +145,29 @@
             }
 
             .hbpros-list .list-container {
-                height: 90vh;
+                height: 85vh;
                 overflow: auto;
+            }
+
+
+            .hbpros-list .list-container .new-letter {
+                padding: 30px;
+                margin: 20px 0;
+                text-align: center;
+                background-color: rgba(0,0,0,0.5);
+                font-weight: bolder;
+                font-size: 32px;
             }
 
             @media only screen and (min-width: 960px) {
                 .hbpros-list {
                     width: 95%;
+                }
+
+                .hbpros-list .card {
+                    float: left;
+                    margin-right: 10px;
+                    margin-bottom: 10px;
                 }
             }
         </style>
@@ -176,30 +181,50 @@
 
             <div class="list-container" show={ isOpen }>
                 <hr>
-                <ul class="flex-container">
-                    <li class="card" each={ hbpro in hbpros }>
-						<div class="hbpro">
-			                <div class="hbpro-headshot">
-			                    <img src="{ hbpro.profileImgUrl }"/>
+                <div>
+                    <div each="{ hbpro in hbpros }">
+                        <div show="{ isNewLetter(hbpro.name[0].toLowerCase()) }">
+                            <div style="clear: both;"></div>
+                            <div class="new-letter">
+                                { hbpro.name[0].toUpperCase() }
+                            </div>
+                        </div>
+
+                        <div class="card" >
+						    <div class="hbpro">
+			                    <div class="hbpro-headshot">
+			                        <img src="{ hbpro.profileImgUrl }"/>
+			                    </div>
+			                    <div class="hbpro-info">
+			                        <strong>{ hbpro.name }</strong><br />
+			                        { hbpro.location }<br />
+			                        <a href="{ hbpro.website.url }">{ hbpro.website.label }</a><br />
+			                        <raw html="{ _generateSocialLinks(hbpro) }"></raw>
+			                    </div>
 			                </div>
-			                <div class="hbpro-info">
-			                    <strong>{ hbpro.name }</strong><br />
-			                    { hbpro.location }<br />
-			                    <a href="{ hbpro.website.url }">{ hbpro.website.label }</a><br />
-			                    <raw html="{ _generateSocialLinks(hbpro) }"></raw>
-			                </div>
-			            </div>
-                    </li>
-                <ul>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
 
         let tag = this
+        let oldLetter = ""
 
         tag.isOpen = !!tag.opts.open
 
         tag.toggleList = () => {
             tag.isOpen = !tag.isOpen
+        }
+
+        tag.isNewLetter = (newLetter) => {
+            if(newLetter != oldLetter) {
+                oldLetter = newLetter
+                return true
+            }
+
+            return false
         }
 
         tag.on("update", () => {
