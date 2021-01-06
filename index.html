@@ -170,6 +170,12 @@
                 font-size: 32px;
             }
 
+            .hbpros-list input[type=text] {
+                padding: 10px;
+                width: 90%;
+                outline: none;
+            }
+
 
             @media only screen and (min-width: 960px) {
                 .hbpros-list {
@@ -181,11 +187,19 @@
                     margin-right: 10px;
                     margin-bottom: 10px;
                 }
+
+                .hbpros-list input[type=text] {
+                    width: 50%;
+                }
             }
         </style>
 
         <div class="hbpros-list { isOpen ? 'open' : 'closed'}">
-            <header onClick="{ toggleList }">{ opts.hbpros.length } HB!PROs Around The World! <span class="closeme">X</span></header>
+            <header>
+                <span show={ !isOpen }>{ opts.hbpros.length } HB!PROs Around The World!</span> 
+                <span show={ isOpen }><input id="filterInput" type="text" onkeyup={ filterPros } placeholder="Search ..." autofocus></span>
+                <span onClick={ toggleList } class="closeme">X</span>
+            </header>
 
             <div onClick="{ toggleList }" class="logo">
                 <img src="https://i.imgur.com/XSfGzLF.png" />
@@ -194,7 +208,7 @@
             <div class="list-container" show={ isOpen }>
                 <hr>
                 <div>
-                    <div each="{ hbpro in hbpros }">
+                    <div each="{ hbpro in filteredPros }">
                         <div show="{ isNewLetter(hbpro.name[0].toLowerCase()) }">
                             <div style="clear: both;"></div>
                             <div class="new-letter">
@@ -233,6 +247,8 @@
 
         tag.toggleList = () => {
             tag.isOpen = !tag.isOpen
+
+            if(tag.isOpen) setTimeout( () => {document.getElementById("filterInput").focus()}, 0 )
         }
 
         tag.isNewLetter = (newLetter) => {
@@ -244,9 +260,22 @@
             return false
         }
 
+        tag.filterPros = e => {
+            let filterText = e.target.value.toLowerCase()
+
+            tag.filteredPros = tag.opts.hbpros
+
+            tag.update({
+                filteredPros: tag.opts.hbpros.filter( hbpro => `${ hbpro.name } ${ hbpro.location }`.toLowerCase().indexOf( filterText ) > -1 )
+            })
+        }
+
         tag.on("update", () => {
+            // trying to get that list
+            if( !tag.filteredPros ) tag.filteredPros = tag.opts.hbpros
+
             // sorting by name
-            tag.hbpros = tag.opts.hbpros.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)); 
+            tag.filteredPros = tag.filteredPros.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)); 
         })
 
     </hbpros-list>
