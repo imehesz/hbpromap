@@ -196,7 +196,7 @@
 
         <div class="hbpros-list { isOpen ? 'open' : 'closed'}">
             <header>
-                <span show={ !isOpen }>{ opts.hbpros.length } HB!PROs Around The World!</span> 
+                <span onClick={ toggleList } show={ !isOpen } title="{ opts.hbpros.length} HB!PROs">Click to see HB!PROs around the World!</span> 
                 <span show={ isOpen }><input id="filterInput" type="text" onkeyup={ filterPros } placeholder="Search ..." autofocus></span>
                 <span onClick={ toggleList } class="closeme">X</span>
             </header>
