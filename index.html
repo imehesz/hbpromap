@@ -30,7 +30,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2.rc.2/leaflet.js"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/3.13.2/riot+compiler.min.js"></script>
-	<script src="js/hbpros.js?v=20201128"></script>
+	<script src="js/hbpros.js?v=20210124"></script>
 
 <script type="riot/tag">
   <moo>
@@ -229,7 +229,7 @@
                                         <span show={ hbpro.hostOnline == "Y" } class="bullet bullet__online">ONLINE</span>
                                     </div>
                                     { hbpro.location }<br />
-			                        <a href="{ hbpro.website.url }">{ hbpro.website.label }</a><br />
+			                        <a target="_blank" href="{ hbpro.website.url }">{ hbpro.website.label }</a><br />
 			                        <raw html="{ _generateSocialLinks(hbpro) }"></raw>
 			                    </div>
 			                </div>

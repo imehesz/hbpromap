@@ -60,28 +60,28 @@ function _generateSocialLinks(hbpro) {
     hbpro.social.map((social) => {
         switch( social.label.toLowerCase() ) {
             case "twitter":
-                            retval += `<a class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/9bbddae7e626bda73c943e06b4568a7a02e193b4/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f747769747465722e737667" /></a>`
+                            retval += `<a target="_blank" class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/9bbddae7e626bda73c943e06b4568a7a02e193b4/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f747769747465722e737667" /></a>`
                             break;
 
             case "facebook":
-                            retval += `<a class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/e6d2040c65e8c6f4da10db72436cf9a1196e43ae/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f66616365626f6f6b2e737667" /></a>`
+                            retval += `<a target="_blank" class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/e6d2040c65e8c6f4da10db72436cf9a1196e43ae/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f66616365626f6f6b2e737667" /></a>`
                             break;
 
             case "mailchimp":
-                            retval += `<a class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/277d0abb1e009ef37af51cca0d98e7e5548beb99/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f6d61696c6368696d702e737667" /></a>`
+                            retval += `<a target="_blank" class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/277d0abb1e009ef37af51cca0d98e7e5548beb99/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f6d61696c6368696d702e737667" /></a>`
                             break;
 
             case "insta":
-                            retval += `<a class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/68ff38b86f01b428567dcc406116e23728245f4e/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f696e7374616772616d2e737667" /></a>`
+                            retval += `<a target="_blank" class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/68ff38b86f01b428567dcc406116e23728245f4e/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f696e7374616772616d2e737667" /></a>`
                             break;
 
             case "youtube":
-                            retval += `<a class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/0f31a4f7adb78461ca03dfaad4a138eedf0d14e0/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f796f75747562652e737667" /></a>`
+                            retval += `<a target="_blank" class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/0f31a4f7adb78461ca03dfaad4a138eedf0d14e0/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f796f75747562652e737667" /></a>`
 
                             break;
 
             default:
-                retval += `<a class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/16fa1202696e1ea968f37f2e6a31bd3e118df23d/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f67686f73742e737667"/></a>`
+                retval += `<a target="_blank" class="social-link" href="${ social.url }" title="${ social.url }"><img src="https://camo.githubusercontent.com/16fa1202696e1ea968f37f2e6a31bd3e118df23d/68747470733a2f2f6564656e742e6769746875622e696f2f537570657254696e7949636f6e732f696d616765732f7376672f67686f73742e737667"/></a>`
         }
     })
 
@@ -111,7 +111,7 @@ function getHbProInfo(hbpro) {
                     ${ hostInfo }
 
                     ${ hbpro.location }<br />
-                    <a href="${ hbpro.website.url }">${ hbpro.website.label }</a><br />
+                    <a target="_blank" href="${ hbpro.website.url }">${ hbpro.website.label }</a><br />
                     ${ socialLinks }
                 </div>
             </div>
